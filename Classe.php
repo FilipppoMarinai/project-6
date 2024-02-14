@@ -13,9 +13,12 @@
         }
 
         public function getAlunni(){
-            foreach ($this->alunni as $alunno) {
-                echo $alunno->display();
+            $ret = array();
+            foreach($this->alunni as $alunno){
+                $ret[] = ["nome"=>$alunno->getName(), "cognome"=>$alunno->getSurname(), "eta"=>$alunno->getAge()];
             }
+
+            return json_encode($ret, JSON_PRETTY_PRINT);
         }
 
         public function search($name){
