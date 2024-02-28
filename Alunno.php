@@ -1,5 +1,5 @@
 <?php
-    class Alunno{
+    class Alunno implements JsonSerializable{
         protected $name;
         protected $surname;
         protected $age;
@@ -32,6 +32,16 @@
 
         public function setAge($age){
             $this->age = $age;
+        }
+
+        public function jsonSerialize(){
+            $a = [
+                "name" => $this->name,
+                "surname" => $this->surname,
+                "age" => $this->age
+            ];
+
+            return $a;
         }
 
         public function display(){

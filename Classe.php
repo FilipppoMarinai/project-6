@@ -1,7 +1,7 @@
 <?php
     require "./Alunno.php";
 
-    class Classe{
+    class Classe implements JsonSerializable{
         private $alunni;
 
         public function Classe(){
@@ -12,28 +12,28 @@
             $this->alunni = array($alunno1, $alunno2, $alunno3, $alunno4);
         }
 
-        public function getAlunni(){
-            $ret = array();
-            foreach($this->alunni as $alunno){
-                $ret[] = ["nome"=>$alunno->getName(), "cognome"=>$alunno->getSurname(), "eta"=>$alunno->getAge()];
-            }
-
-            return json_encode($ret, JSON_PRETTY_PRINT);
-        }
-
         public function search($name){
-            $isAlunno = false;
+            $a;
             foreach($this->alunni as $alunno){
                 if(strtolower($alunno->getName()) == strtolower($name)){
-                    echo $alunno->display();
-                    $isAlunno = true;
+                    $a = [
+                        "name" => $alunno->getName(),
+                        "surname" => $alunno->getSurname(),
+                        "age" => $alunno->getAge()
+                    ];
+                    
                     break;
                 }
             }
+            return $a;
+        }
 
-            if(!$isAlunno){
-                echo "Alunno non presente";
-            }
+        public function jsonSerialize(){
+            $a = [
+                "alunni" => $this->alunni
+            ];
+
+            return $a;
         }
     }
 ?>
