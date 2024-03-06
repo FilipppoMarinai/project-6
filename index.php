@@ -11,14 +11,12 @@ require __DIR__ . '/controllers/AlunniController.php';
 $app = AppFactory::create();
 
 $app->get('/', "SiteController:home");
-
 $app->get('/alunni', "AlunniController:index");
-
 $app->get('/alunni/{nome}', "AlunniController:show");
-
 $app->get('/api/alunni', "ApiAlunniController:index");
-
-
 $app->get('/api/alunni/{nome}', "ApiAlunniController:show");
+$app->post('/alunni', "AlunniController:createAlunno");
+$app->put('/alunni/{nome}', "AlunniController:updateAlunno");
+$app->delete('/alunni/{nome}', "AlunniController:remove");
 
 $app->run();

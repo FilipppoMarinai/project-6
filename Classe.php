@@ -24,7 +24,7 @@
                         ];
                     }
                     else{
-                        $a = $alunno->display();
+                        $a = new Alunno($alunno->getName(), $alunno->getSurname(), $alunno->getAge());
                     }
                     
                     break;

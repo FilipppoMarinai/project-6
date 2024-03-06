@@ -14,13 +14,14 @@
         function show(Request $request, Response $response, $args) {
             $classe = new Classe();
             $name = $args['nome'];
+            $alunno = $classe->search($name, true);
 
-            if($classe->search($name, true) == null){
+            if($alunno == null){
                 $response->getBody()->write(json_encode(["Error" => "Alunno non presente"], JSON_PRETTY_PRINT));
                 return $response->withHeader("Content-Type", "application/json")->withStatus(404);
             }
             else{
-                $response->getBody()->write(json_encode($classe->search($name, true), JSON_PRETTY_PRINT));
+                $response->getBody()->write(json_encode($alunno, JSON_PRETTY_PRINT));
                 return $response->withHeader("Content-Type", "application/json")->withStatus(200);
             }
         
